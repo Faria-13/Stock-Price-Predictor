@@ -22,7 +22,7 @@ def predict(dates, prices, x):
     svr_rbf = SVR(kernel='rbf',C=1e3,gamma=0.1)
     svr_len.fit(dates,prices)
     svr_poly.fit(dates,prices)
-    svr_rbf.fir(dates,prices)
+    svr_rbf.fit(dates,prices)
     
     plt.scatter(dates,prices, color='black',label='Data')
     plt.plot(dates, svr_rbf.predict(dates), color='red', label= 'RBF Model')
@@ -37,7 +37,7 @@ def predict(dates, prices, x):
     return svr_rbf.predict(x)[0], svr_len.predict(x)[0],svr_poly.predict(x)[0]
 
 
-get_data('aapl.csv')
-predicted_price = predict(dates,prices,29)
+get_data('AAPL.csv')
+predicted_price = predict(dates,prices,19)
 print(predicted_price)
     
