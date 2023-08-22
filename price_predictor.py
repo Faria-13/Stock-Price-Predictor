@@ -1,7 +1,7 @@
 import csv
 import numpy as np
 from sklearn.svm import SVR
-import matplotlib as plt
+import matplotlib.pyplot as plt
 
 dates= []
 prices = []
@@ -11,12 +11,12 @@ def get_data(filename):
         fileReader = csv.reader(file)
         next(fileReader)
         for row in fileReader:
-            dates.append(int(row[0].split('-')[0]))
+            dates.append(int(row[0].split('-')[2]))
             prices.append(float(row[1]))
     return
 
 def predict(dates, prices, x):
-    dates = np.reshape(dates,len(dates),1)
+    dates = np.reshape(dates,(len(dates),1))
     svr_len = SVR(kernel='linear',C=1e3)
     svr_poly = SVR(kernel='poly',C=1e3, degree=2)
     svr_rbf = SVR(kernel='rbf',C=1e3,gamma=0.1)
@@ -38,6 +38,6 @@ def predict(dates, prices, x):
 
 
 get_data('AAPL.csv')
-predicted_price = predict(dates,prices,19)
+predicted_price = predict(dates,prices,29)
 print(predicted_price)
     
